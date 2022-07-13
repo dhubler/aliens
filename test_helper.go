@@ -1,17 +1,13 @@
 package aliens
 
 import (
-	"os"
 	"io"
 	"io/ioutil"
+	"os"
 	"testing"
-	"flag"
 
 	"github.com/stretchr/testify/assert"
-
 )
-
-var updateFlag = flag.Bool("update", false, "update expected golden file(s)")
 
 // Gold uses a testing strategy to compare streamed output with a golden standard
 // which is usually the last known good output. Golden files are updated anytime
@@ -19,13 +15,14 @@ var updateFlag = flag.Bool("update", false, "update expected golden file(s)")
 // a particular test
 //
 // https://medium.com/@jarifibrahim/golden-files-why-you-should-use-them-47087ec994bf
-func Golden(t *testing.T, expectedFile string, actual io.Reader) {
+// https://ieftimov.com/posts/testing-in-go-golden-files/
+func Golden(t *testing.T, updateFlag bool, expectedFile string, actual io.Reader) {
 	t.Helper()
 	actualBytes, err := ioutil.ReadAll(actual)
 	if err != nil {
 		panic(err)
 	}
-	if *updateFlag {
+	if updateFlag {
 		ioutil.WriteFile(expectedFile, actualBytes, 0666)
 	} else {
 		expectedRdr, err := os.Open(expectedFile)

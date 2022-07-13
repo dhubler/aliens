@@ -2,11 +2,14 @@ package aliens
 
 import (
 	"bytes"
+	"flag"
 	"fmt"
 	"math/rand"
 	"os"
 	"testing"
 )
+
+var updateFlag = flag.Bool("update", false, "update expected golden file(s)")
 
 func TestSmallInvasion(t *testing.T) {
 	// allow for pseudo-random invasions
@@ -28,7 +31,7 @@ func TestSmallInvasion(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	Golden(t, "testdata/small-map-invasion.golden", &buf)
+	Golden(t, *updateFlag, "testdata/small-map-invasion.golden", &buf)
 }
 
 func TestMediumInvasion(t *testing.T) {
@@ -45,7 +48,7 @@ func TestMediumInvasion(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	Golden(t, "testdata/medium-invasion.golden", &buf)
+	Golden(t, *updateFlag, "testdata/medium-invasion.golden", &buf)
 }
 
 func generateCityMap(levels int) map[string]*city {

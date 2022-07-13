@@ -87,5 +87,5 @@ func TestLargeDump(t *testing.T) {
 	var actual bytes.Buffer
 	err := dump(&actual, pool)
 	assert.NoError(t, err)
-	Golden(t, "testdata/large-dump-map.golden", &actual)
+	Golden(t, *updateFlag, "testdata/large-dump-map.golden", &actual)
 }

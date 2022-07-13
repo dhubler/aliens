@@ -68,7 +68,12 @@ func (attack *invasion) invade(cities map[string]*city, aliens []alien, rounds i
 	for i := 0; i < rounds; i++ {
 		log.Printf("invasion %d round", i+1)
 		currentCities := invadedCities
+
+		// we iterate the sorted city names to allow for pseudom random test
+		// cases.  Otherwise iterating invadedCities would be bit faster and
+		// simpler
 		currentCitiesNames := invadedCityNames(currentCities)
+
 		invadedCities := make(map[*city]alien)
 		trappedCount := 0
 		for _, origCityName := range currentCitiesNames {
