@@ -1,0 +1,485 @@
+x north=xn south=xs east=xe west=xw
+xe north=xen south=xes east=xee west=x
+xee north=xeen south=xees east=xeee west=xe
+xeee north=xeeen south=xeees east=xeeee west=xee
+xeeee north=xeeeen south=xeeees east=xeeeee west=xeee
+xeeeee west=xeeee
+xeeeen south=xeeee
+xeeees north=xeeee
+xeeen north=xeeenn south=xeee east=xeeene west=xeeenw
+xeeene west=xeeen
+xeeenn south=xeeen
+xeeenw east=xeeen
+xeees north=xeee south=xeeess east=xeeese west=xeeesw
+xeeese west=xeees
+xeeess north=xeees
+xeeesw east=xeees
+xeen north=xeenn south=xee east=xeene west=xeenw
+xeene north=xeenen south=xeenes east=xeenee west=xeen
+xeenee west=xeene
+xeenen south=xeene
+xeenes north=xeene
+xeenn north=xeennn south=xeen east=xeenne west=xeennw
+xeenne west=xeenn
+xeennn south=xeenn
+xeennw east=xeenn
+xeenw north=xeenwn south=xeenws east=xeen west=xeenww
+xeenwn south=xeenw
+xeenws north=xeenw
+xeenww east=xeenw
+xees north=xee south=xeess east=xeese west=xeesw
+xeese north=xeesen south=xeeses east=xeesee west=xees
+xeesee west=xeese
+xeesen south=xeese
+xeeses north=xeese
+xeess north=xees south=xeesss east=xeesse west=xeessw
+xeesse west=xeess
+xeesss north=xeess
+xeessw east=xeess
+xeesw north=xeeswn south=xeesws east=xees west=xeesww
+xeeswn south=xeesw
+xeesws north=xeesw
+xeesww east=xeesw
+xen north=xenn south=xe east=xene west=xenw
+xene north=xenen south=xenes east=xenee west=xen
+xenee north=xeneen south=xenees east=xeneee west=xene
+xeneee west=xenee
+xeneen south=xenee
+xenees north=xenee
+xenen north=xenenn south=xene east=xenene west=xenenw
+xenene west=xenen
+xenenn south=xenen
+xenenw east=xenen
+xenes north=xene south=xeness east=xenese west=xenesw
+xenese west=xenes
+xeness north=xenes
+xenesw east=xenes
+xenn north=xennn south=xen east=xenne west=xennw
+xenne north=xennen south=xennes east=xennee west=xenn
+xennee west=xenne
+xennen south=xenne
+xennes north=xenne
+xennn north=xennnn south=xenn east=xennne west=xennnw
+xennne west=xennn
+xennnn south=xennn
+xennnw east=xennn
+xennw north=xennwn south=xennws east=xenn west=xennww
+xennwn south=xennw
+xennws north=xennw
+xennww east=xennw
+xenw north=xenwn south=xenws east=xen west=xenww
+xenwn north=xenwnn south=xenw east=xenwne west=xenwnw
+xenwne west=xenwn
+xenwnn south=xenwn
+xenwnw east=xenwn
+xenws north=xenw south=xenwss east=xenwse west=xenwsw
+xenwse west=xenws
+xenwss north=xenws
+xenwsw east=xenws
+xenww north=xenwwn south=xenwws east=xenw west=xenwww
+xenwwn south=xenww
+xenwws north=xenww
+xenwww east=xenww
+xes north=xe south=xess east=xese west=xesw
+xese north=xesen south=xeses east=xesee west=xes
+xesee north=xeseen south=xesees east=xeseee west=xese
+xeseee west=xesee
+xeseen south=xesee
+xesees north=xesee
+xesen north=xesenn south=xese east=xesene west=xesenw
+xesene west=xesen
+xesenn south=xesen
+xesenw east=xesen
+xeses north=xese south=xesess east=xesese west=xesesw
+xesese west=xeses
+xesess north=xeses
+xesesw east=xeses
+xess north=xes south=xesss east=xesse west=xessw
+xesse north=xessen south=xesses east=xessee west=xess
+xessee west=xesse
+xessen south=xesse
+xesses north=xesse
+xesss north=xess south=xessss east=xessse west=xesssw
+xessse west=xesss
+xessss north=xesss
+xesssw east=xesss
+xessw north=xesswn south=xessws east=xess west=xessww
+xesswn south=xessw
+xessws north=xessw
+xessww east=xessw
+xesw north=xeswn south=xesws east=xes west=xesww
+xeswn north=xeswnn south=xesw east=xeswne west=xeswnw
+xeswne west=xeswn
+xeswnn south=xeswn
+xeswnw east=xeswn
+xesws north=xesw south=xeswss east=xeswse west=xeswsw
+xeswse west=xesws
+xeswss north=xesws
+xeswsw east=xesws
+xesww north=xeswwn south=xeswws east=xesw west=xeswww
+xeswwn south=xesww
+xeswws north=xesww
+xeswww east=xesww
+xn north=xnn south=x east=xne west=xnw
+xne north=xnen south=xnes east=xnee west=xn
+xnee north=xneen south=xnees east=xneee west=xne
+xneee north=xneeen south=xneees east=xneeee west=xnee
+xneeee west=xneee
+xneeen south=xneee
+xneees north=xneee
+xneen north=xneenn south=xnee east=xneene west=xneenw
+xneene west=xneen
+xneenn south=xneen
+xneenw east=xneen
+xnees north=xnee south=xneess east=xneese west=xneesw
+xneese west=xnees
+xneess north=xnees
+xneesw east=xnees
+xnen north=xnenn south=xne east=xnene west=xnenw
+xnene north=xnenen south=xnenes east=xnenee west=xnen
+xnenee west=xnene
+xnenen south=xnene
+xnenes north=xnene
+xnenn north=xnennn south=xnen east=xnenne west=xnennw
+xnenne west=xnenn
+xnennn south=xnenn
+xnennw east=xnenn
+xnenw north=xnenwn south=xnenws east=xnen west=xnenww
+xnenwn south=xnenw
+xnenws north=xnenw
+xnenww east=xnenw
+xnes north=xne south=xness east=xnese west=xnesw
+xnese north=xnesen south=xneses east=xnesee west=xnes
+xnesee west=xnese
+xnesen south=xnese
+xneses north=xnese
+xness north=xnes south=xnesss east=xnesse west=xnessw
+xnesse west=xness
+xnesss north=xness
+xnessw east=xness
+xnesw north=xneswn south=xnesws east=xnes west=xnesww
+xneswn south=xnesw
+xnesws north=xnesw
+xnesww east=xnesw
+xnn north=xnnn south=xn east=xnne west=xnnw
+xnne north=xnnen south=xnnes east=xnnee west=xnn
+xnnee north=xnneen south=xnnees east=xnneee west=xnne
+xnneee west=xnnee
+xnneen south=xnnee
+xnnees north=xnnee
+xnnen north=xnnenn south=xnne east=xnnene west=xnnenw
+xnnene west=xnnen
+xnnenn south=xnnen
+xnnenw east=xnnen
+xnnes north=xnne south=xnness east=xnnese west=xnnesw
+xnnese west=xnnes
+xnness north=xnnes
+xnnesw east=xnnes
+xnnn north=xnnnn south=xnn east=xnnne west=xnnnw
+xnnne north=xnnnen south=xnnnes east=xnnnee west=xnnn
+xnnnee west=xnnne
+xnnnen south=xnnne
+xnnnes north=xnnne
+xnnnn north=xnnnnn south=xnnn east=xnnnne west=xnnnnw
+xnnnne west=xnnnn
+xnnnnn south=xnnnn
+xnnnnw east=xnnnn
+xnnnw north=xnnnwn south=xnnnws east=xnnn west=xnnnww
+xnnnwn south=xnnnw
+xnnnws north=xnnnw
+xnnnww east=xnnnw
+xnnw north=xnnwn south=xnnws east=xnn west=xnnww
+xnnwn north=xnnwnn south=xnnw east=xnnwne west=xnnwnw
+xnnwne west=xnnwn
+xnnwnn south=xnnwn
+xnnwnw east=xnnwn
+xnnws north=xnnw south=xnnwss east=xnnwse west=xnnwsw
+xnnwse west=xnnws
+xnnwss north=xnnws
+xnnwsw east=xnnws
+xnnww north=xnnwwn south=xnnwws east=xnnw west=xnnwww
+xnnwwn south=xnnww
+xnnwws north=xnnww
+xnnwww east=xnnww
+xnw north=xnwn south=xnws east=xn west=xnww
+xnwn north=xnwnn south=xnw east=xnwne west=xnwnw
+xnwne north=xnwnen south=xnwnes east=xnwnee west=xnwn
+xnwnee west=xnwne
+xnwnen south=xnwne
+xnwnes north=xnwne
+xnwnn north=xnwnnn south=xnwn east=xnwnne west=xnwnnw
+xnwnne west=xnwnn
+xnwnnn south=xnwnn
+xnwnnw east=xnwnn
+xnwnw north=xnwnwn south=xnwnws east=xnwn west=xnwnww
+xnwnwn south=xnwnw
+xnwnws north=xnwnw
+xnwnww east=xnwnw
+xnws north=xnw south=xnwss east=xnwse west=xnwsw
+xnwse north=xnwsen south=xnwses east=xnwsee west=xnws
+xnwsee west=xnwse
+xnwsen south=xnwse
+xnwses north=xnwse
+xnwss north=xnws south=xnwsss east=xnwsse west=xnwssw
+xnwsse west=xnwss
+xnwsss north=xnwss
+xnwssw east=xnwss
+xnwsw north=xnwswn south=xnwsws east=xnws west=xnwsww
+xnwswn south=xnwsw
+xnwsws north=xnwsw
+xnwsww east=xnwsw
+xnww north=xnwwn south=xnwws east=xnw west=xnwww
+xnwwn north=xnwwnn south=xnww east=xnwwne west=xnwwnw
+xnwwne west=xnwwn
+xnwwnn south=xnwwn
+xnwwnw east=xnwwn
+xnwws north=xnww south=xnwwss east=xnwwse west=xnwwsw
+xnwwse west=xnwws
+xnwwss north=xnwws
+xnwwsw east=xnwws
+xnwww north=xnwwwn south=xnwwws east=xnww west=xnwwww
+xnwwwn south=xnwww
+xnwwws north=xnwww
+xnwwww east=xnwww
+xs north=x south=xss east=xse west=xsw
+xse north=xsen south=xses east=xsee west=xs
+xsee north=xseen south=xsees east=xseee west=xse
+xseee north=xseeen south=xseees east=xseeee west=xsee
+xseeee west=xseee
+xseeen south=xseee
+xseees north=xseee
+xseen north=xseenn south=xsee east=xseene west=xseenw
+xseene west=xseen
+xseenn south=xseen
+xseenw east=xseen
+xsees north=xsee south=xseess east=xseese west=xseesw
+xseese west=xsees
+xseess north=xsees
+xseesw east=xsees
+xsen north=xsenn south=xse east=xsene west=xsenw
+xsene north=xsenen south=xsenes east=xsenee west=xsen
+xsenee west=xsene
+xsenen south=xsene
+xsenes north=xsene
+xsenn north=xsennn south=xsen east=xsenne west=xsennw
+xsenne west=xsenn
+xsennn south=xsenn
+xsennw east=xsenn
+xsenw north=xsenwn south=xsenws east=xsen west=xsenww
+xsenwn south=xsenw
+xsenws north=xsenw
+xsenww east=xsenw
+xses north=xse south=xsess east=xsese west=xsesw
+xsese north=xsesen south=xseses east=xsesee west=xses
+xsesee west=xsese
+xsesen south=xsese
+xseses north=xsese
+xsess north=xses south=xsesss east=xsesse west=xsessw
+xsesse west=xsess
+xsesss north=xsess
+xsessw east=xsess
+xsesw north=xseswn south=xsesws east=xses west=xsesww
+xseswn south=xsesw
+xsesws north=xsesw
+xsesww east=xsesw
+xss north=xs south=xsss east=xsse west=xssw
+xsse north=xssen south=xsses east=xssee west=xss
+xssee north=xsseen south=xssees east=xsseee west=xsse
+xsseee west=xssee
+xsseen south=xssee
+xssees north=xssee
+xssen north=xssenn south=xsse east=xssene west=xssenw
+xssene west=xssen
+xssenn south=xssen
+xssenw east=xssen
+xsses north=xsse south=xssess east=xssese west=xssesw
+xssese west=xsses
+xssess north=xsses
+xssesw east=xsses
+xsss north=xss south=xssss east=xssse west=xsssw
+xssse north=xsssen south=xssses east=xsssee west=xsss
+xsssee west=xssse
+xsssen south=xssse
+xssses north=xssse
+xssss north=xsss south=xsssss east=xsssse west=xssssw
+xsssse west=xssss
+xsssss north=xssss
+xssssw east=xssss
+xsssw north=xssswn south=xsssws east=xsss west=xsssww
+xssswn south=xsssw
+xsssws north=xsssw
+xsssww east=xsssw
+xssw north=xsswn south=xssws east=xss west=xssww
+xsswn north=xsswnn south=xssw east=xsswne west=xsswnw
+xsswne west=xsswn
+xsswnn south=xsswn
+xsswnw east=xsswn
+xssws north=xssw south=xsswss east=xsswse west=xsswsw
+xsswse west=xssws
+xsswss north=xssws
+xsswsw east=xssws
+xssww north=xsswwn south=xsswws east=xssw west=xsswww
+xsswwn south=xssww
+xsswws north=xssww
+xsswww east=xssww
+xsw north=xswn south=xsws east=xs west=xsww
+xswn north=xswnn south=xsw east=xswne west=xswnw
+xswne north=xswnen south=xswnes east=xswnee west=xswn
+xswnee west=xswne
+xswnen south=xswne
+xswnes north=xswne
+xswnn north=xswnnn south=xswn east=xswnne west=xswnnw
+xswnne west=xswnn
+xswnnn south=xswnn
+xswnnw east=xswnn
+xswnw north=xswnwn south=xswnws east=xswn west=xswnww
+xswnwn south=xswnw
+xswnws north=xswnw
+xswnww east=xswnw
+xsws north=xsw south=xswss east=xswse west=xswsw
+xswse north=xswsen south=xswses east=xswsee west=xsws
+xswsee west=xswse
+xswsen south=xswse
+xswses north=xswse
+xswss north=xsws south=xswsss east=xswsse west=xswssw
+xswsse west=xswss
+xswsss north=xswss
+xswssw east=xswss
+xswsw north=xswswn south=xswsws east=xsws west=xswsww
+xswswn south=xswsw
+xswsws north=xswsw
+xswsww east=xswsw
+xsww north=xswwn south=xswws east=xsw west=xswww
+xswwn north=xswwnn south=xsww east=xswwne west=xswwnw
+xswwne west=xswwn
+xswwnn south=xswwn
+xswwnw east=xswwn
+xswws north=xsww south=xswwss east=xswwse west=xswwsw
+xswwse west=xswws
+xswwss north=xswws
+xswwsw east=xswws
+xswww north=xswwwn south=xswwws east=xsww west=xswwww
+xswwwn south=xswww
+xswwws north=xswww
+xswwww east=xswww
+xw north=xwn south=xws east=x west=xww
+xwn north=xwnn south=xw east=xwne west=xwnw
+xwne north=xwnen south=xwnes east=xwnee west=xwn
+xwnee north=xwneen south=xwnees east=xwneee west=xwne
+xwneee west=xwnee
+xwneen south=xwnee
+xwnees north=xwnee
+xwnen north=xwnenn south=xwne east=xwnene west=xwnenw
+xwnene west=xwnen
+xwnenn south=xwnen
+xwnenw east=xwnen
+xwnes north=xwne south=xwness east=xwnese west=xwnesw
+xwnese west=xwnes
+xwness north=xwnes
+xwnesw east=xwnes
+xwnn north=xwnnn south=xwn east=xwnne west=xwnnw
+xwnne north=xwnnen south=xwnnes east=xwnnee west=xwnn
+xwnnee west=xwnne
+xwnnen south=xwnne
+xwnnes north=xwnne
+xwnnn north=xwnnnn south=xwnn east=xwnnne west=xwnnnw
+xwnnne west=xwnnn
+xwnnnn south=xwnnn
+xwnnnw east=xwnnn
+xwnnw north=xwnnwn south=xwnnws east=xwnn west=xwnnww
+xwnnwn south=xwnnw
+xwnnws north=xwnnw
+xwnnww east=xwnnw
+xwnw north=xwnwn south=xwnws east=xwn west=xwnww
+xwnwn north=xwnwnn south=xwnw east=xwnwne west=xwnwnw
+xwnwne west=xwnwn
+xwnwnn south=xwnwn
+xwnwnw east=xwnwn
+xwnws north=xwnw south=xwnwss east=xwnwse west=xwnwsw
+xwnwse west=xwnws
+xwnwss north=xwnws
+xwnwsw east=xwnws
+xwnww north=xwnwwn south=xwnwws east=xwnw west=xwnwww
+xwnwwn south=xwnww
+xwnwws north=xwnww
+xwnwww east=xwnww
+xws north=xw south=xwss east=xwse west=xwsw
+xwse north=xwsen south=xwses east=xwsee west=xws
+xwsee north=xwseen south=xwsees east=xwseee west=xwse
+xwseee west=xwsee
+xwseen south=xwsee
+xwsees north=xwsee
+xwsen north=xwsenn south=xwse east=xwsene west=xwsenw
+xwsene west=xwsen
+xwsenn south=xwsen
+xwsenw east=xwsen
+xwses north=xwse south=xwsess east=xwsese west=xwsesw
+xwsese west=xwses
+xwsess north=xwses
+xwsesw east=xwses
+xwss north=xws south=xwsss east=xwsse west=xwssw
+xwsse north=xwssen south=xwsses east=xwssee west=xwss
+xwssee west=xwsse
+xwssen south=xwsse
+xwsses north=xwsse
+xwsss north=xwss south=xwssss east=xwssse west=xwsssw
+xwssse west=xwsss
+xwssss north=xwsss
+xwsssw east=xwsss
+xwssw north=xwsswn south=xwssws east=xwss west=xwssww
+xwsswn south=xwssw
+xwssws north=xwssw
+xwssww east=xwssw
+xwsw north=xwswn south=xwsws east=xws west=xwsww
+xwswn north=xwswnn south=xwsw east=xwswne west=xwswnw
+xwswne west=xwswn
+xwswnn south=xwswn
+xwswnw east=xwswn
+xwsws north=xwsw south=xwswss east=xwswse west=xwswsw
+xwswse west=xwsws
+xwswss north=xwsws
+xwswsw east=xwsws
+xwsww north=xwswwn south=xwswws east=xwsw west=xwswww
+xwswwn south=xwsww
+xwswws north=xwsww
+xwswww east=xwsww
+xww north=xwwn south=xwws east=xw west=xwww
+xwwn north=xwwnn south=xww east=xwwne west=xwwnw
+xwwne north=xwwnen south=xwwnes east=xwwnee west=xwwn
+xwwnee west=xwwne
+xwwnen south=xwwne
+xwwnes north=xwwne
+xwwnn north=xwwnnn south=xwwn east=xwwnne west=xwwnnw
+xwwnne west=xwwnn
+xwwnnn south=xwwnn
+xwwnnw east=xwwnn
+xwwnw north=xwwnwn south=xwwnws east=xwwn west=xwwnww
+xwwnwn south=xwwnw
+xwwnws north=xwwnw
+xwwnww east=xwwnw
+xwws north=xww south=xwwss east=xwwse west=xwwsw
+xwwse north=xwwsen south=xwwses east=xwwsee west=xwws
+xwwsee west=xwwse
+xwwsen south=xwwse
+xwwses north=xwwse
+xwwss north=xwws south=xwwsss east=xwwsse west=xwwssw
+xwwsse west=xwwss
+xwwsss north=xwwss
+xwwssw east=xwwss
+xwwsw north=xwwswn south=xwwsws east=xwws west=xwwsww
+xwwswn south=xwwsw
+xwwsws north=xwwsw
+xwwsww east=xwwsw
+xwww north=xwwwn south=xwwws east=xww west=xwwww
+xwwwn north=xwwwnn south=xwww east=xwwwne west=xwwwnw
+xwwwne west=xwwwn
+xwwwnn south=xwwwn
+xwwwnw east=xwwwn
+xwwws north=xwww south=xwwwss east=xwwwse west=xwwwsw
+xwwwse west=xwwws
+xwwwss north=xwwws
+xwwwsw east=xwwws
+xwwww north=xwwwwn south=xwwwws east=xwww west=xwwwww
+xwwwwn south=xwwww
+xwwwws north=xwwww
+xwwwww east=xwwww
