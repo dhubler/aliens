@@ -15,6 +15,11 @@ var numRounds = flag.Int("numRounds", 10, "Number of rounds the aliens perform b
 var silent = flag.Bool("silent", false, "Supress log output but still output city report and fallen cities")
 
 func main() {
+	cl := flag.CommandLine
+	cl.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage of %s: < city-map-file > report\n", os.Args[0])
+		flag.PrintDefaults()
+	}
 	flag.Parse()
 	if *silent {
 		log.SetOutput(ioutil.Discard)

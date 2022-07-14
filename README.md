@@ -8,16 +8,15 @@ Requirements:
 * As cities fall to aliens, they are reported in specfic format detailed [here](#reportFallenCityFormat)
 * Ability to control of the number of aliens in simulation
 
-Simulation will honor the following aliens charistics:
+Simulation will honor the following aliens characteristics:
 
-* Aliens enter a random city one at a time.
 * If two aliens enter a city, city is destroyed along with the aliens.
 * Once all aliens have landed in various cities, in the next round they move to a neighboring city if there is one.  If there isn't one, they would be trapped in that city for the duration of the simulation.
 * Destroyed cites are no longer on the map of available cities
 * On initial landing, if a city is already destroyed then incoming aliens will not land in that destroyed city keeping to the requirement that once a city is destroyed it is off the map.
 * If all remaining aliens are dead, simulation will end
 * If all remaining aliens are trapped, simulation will end
-
+* Aliens all attempt to leave respective cities then enter a new random city one at a time. So if in round `2`, alien `10` was left in a city `X`.  Then in round `3` alien `99` enters city `X` before aliens enters a new city in round `3`, it will not trigger a fight between aliens `10` and `99`.
 
 # Setup
 
@@ -83,8 +82,8 @@ NewYork south=Trenton west=Columbus
 Format Assumptions:
 
 * City names cannot contain spaces
-* If a city references another city in a direction, that referenced city **is not required** to have a separate line.
-* If a map contains inconsitent data with regard to neighboring references then those inconstencies will not be caught.  
+* If a city references another city, that referenced city **is not required** to have a separate line.  So in `Boston north=Bangor` then `Bangor south=Boston` is not required
+* If a map contains inconsistent data with regard to neighboring references then those inconstencies will not be detected and results will be suspect.
 Example of bad data:
 
 ```
@@ -101,7 +100,7 @@ NewYork has been destroyed by alien 1 and alien 0!
 
 Where `NewYork` is the city name. Aliens `1` and `0` are the responsible aliens.
 
-# Developer Note - [Golden files](https://ieftimov.com/posts/testing-in-go-golden-files/)Unit Testing
+# Developer Note - [Golden Files](https://ieftimov.com/posts/testing-in-go-golden-files/) in Unit Testing
 
 Golden files are used to ensure large datasets only change when desired and in precise ways. If a unit test fails because the output doesn't match a "golden file", first inspect the difference.  If the difference is expected, simply accept the difference by running the test again with the `-update` flag.
 
@@ -117,7 +116,7 @@ If difference **is not expected**, then fix the unit test.
 
 # Developer Note - Pseudo Random Unit Testing
 
-Some unit tests set the random number seed to get consistent random values, or "pseudo random" values.  Together with golden files, very complex code with randomness can be tested easily.  In order for this to work, certain code may have to avoid iterating maps as that iteration is not deterministic.
+Some unit tests set the random number seed to get consistent random values, or "pseudo random" values.  Together with golden files, very complex code with randomness can have a predictable output to test against.  In order for this to work, certain code may have to avoid iterating maps as that iteration is not deterministic.
 
 # Developer Note - Test Coverage
 
