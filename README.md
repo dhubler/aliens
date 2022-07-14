@@ -106,7 +106,7 @@ Golden files are used to ensure large datasets only change when desired and in p
 
 Example:
 ```
-go test -run TestMediumInvation
+go test -run TestMediumInvasion
 
         	            	Diff:
         	            	--- Expected
@@ -121,7 +121,7 @@ go test -run TestMediumInvation
 If difference **is expected**, then run following command to update the golden file
 
 ```
-go test -run TestMediumInvation -update
+go test -run TestMediumInvasion -update
 ```
 
 If difference **is not expected**, then you found a bug in your code.
