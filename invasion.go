@@ -12,11 +12,12 @@ import (
 // and can be deterministic and potentially useful for unit testing
 var rnd = rand.New(rand.NewSource(time.Now().Unix()))
 
+// Options to control the invasion
 type Options struct {
-	CityMapInput   io.Reader
-	NumberAliens   int
-	InvationRounds int
-	ReportOutput   io.Writer
+	CityMapInput   io.Reader // follows specific format outlined in README.md
+	NumberAliens   int       // how many aliens to start invasion
+	InvasionRounds int       // rounds to go before giving up
+	ReportOutput   io.Writer // where to send the report output
 }
 
 // Invasion interface to run invasion simulation.
@@ -27,13 +28,9 @@ func Invasion(options Options) error {
 	}
 	attack := &invasion{options.ReportOutput}
 	aliens := createAliens(options.NumberAliens)
-	remaingCities := attack.invade(cities, aliens, options.InvationRounds)
+	remaingCities := attack.invade(cities, aliens, options.InvasionRounds)
 	return dump(options.ReportOutput, remaingCities)
 }
-
-// invasion simulates aliens navigating a map of cities according to a set of
-// rules outlined in README.md.
-// returns list of cities that are remaining after invasion
 
 type invasion struct {
 	report io.Writer
@@ -42,6 +39,9 @@ type invasion struct {
 // acoording to spec.  does not include initial round
 const maxRounds = 10000
 
+// invade simulates aliens navigating a map of cities according to a set of
+// rules outlined in README.md.
+// returns list of cities that are remaining after invasion
 func (attack *invasion) invade(cities map[string]*city, aliens []alien, rounds int) map[string]*city {
 	destroyedCities := make(map[string]*city)
 	invadedCities := make(map[*city]alien)
@@ -107,6 +107,8 @@ func (attack *invasion) invade(cities map[string]*city, aliens []alien, rounds i
 	return remaining
 }
 
+// invadeCity checks if another alien is in city to trigger a destroy or if this
+// is just first visit
 func (attack *invasion) invadeCity(incomingAlien alien, targetCity *city, invadedCities map[*city]alien, destroyedCities map[string]*city) {
 	log.Printf("alien %s invading %s", incomingAlien, targetCity.Name)
 	if invadedAlien, isInvaded := invadedCities[targetCity]; isInvaded {

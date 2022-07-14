@@ -11,8 +11,8 @@ import (
 )
 
 var numAliens = flag.Int("numAliens", 10, "Number of aliens invading")
-var numRounds = flag.Int("numRounds", 10, "Number of rounds the aliens perform beforing giving up")
-var silent = flag.Bool("silent", false, "No log output but still output city report and fallen cities")
+var numRounds = flag.Int("numRounds", 10, "Number of rounds the aliens perform before giving up")
+var silent = flag.Bool("silent", false, "Supress log output but still output city report and fallen cities")
 
 func main() {
 	flag.Parse()
@@ -23,7 +23,7 @@ func main() {
 		ReportOutput:   os.Stdout,
 		CityMapInput:   os.Stdin,
 		NumberAliens:   *numAliens,
-		InvationRounds: *numRounds,
+		InvasionRounds: *numRounds,
 	}
 	err := aliens.Invasion(options)
 	if err != nil {

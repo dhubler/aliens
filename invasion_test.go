@@ -51,6 +51,15 @@ func TestMediumInvasion(t *testing.T) {
 	Golden(t, *updateFlag, "testdata/medium-invasion.golden", &buf)
 }
 
+// generate a city map of a given level
+// Example
+//                         x
+//                 -----------------
+//                 |    |     |    |
+//                xn    xs   xe    xw
+//    -------------    ------...
+//    |   |   |   |    |   |
+//   xnn xns xne xnw  xsn xss  ...
 func generateCityMap(levels int) map[string]*city {
 	root := &city{Name: "x"}
 	pool := make(map[string]*city)
@@ -59,11 +68,15 @@ func generateCityMap(levels int) map[string]*city {
 	return pool
 }
 
+// recursive function to help generate city map
 func generateCityMapNest(levels int, parent *city, pool map[string]*city) {
 	if levels == 0 {
 		return
 	}
 	var added []*city
+
+	// pass 1 : add all the children first before recursing otherwise neighbors will
+	// be different
 	for direction, label := range directionLabels {
 		if parent.neighoringCity(direction) == nil {
 			neighbor := &city{Name: fmt.Sprintf("%s%s", parent.Name, label[:1])}
@@ -72,6 +85,7 @@ func generateCityMapNest(levels int, parent *city, pool map[string]*city) {
 			added = append(added, neighbor)
 		}
 	}
+	// pass 2 : recurse on any new children
 	for _, child := range added {
 		generateCityMapNest(levels-1, child, pool)
 	}

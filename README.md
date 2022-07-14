@@ -3,23 +3,25 @@
 Simulate aliens invading a planet and report back the remaining cities.
 
 Requirements:
-* City maps are provided in files in a specific format detailed (here)[#cityMapFormat]
+* City maps are provided in files in a specific format detailed [here](#cityMapFormat)
 * Any remaining cites at end of simulation should be reported in same format as input city maps.
-* Report cities as they fall also in a specfic format detailed (here)[#reportFallenCityFormat]
-* Allow for control of the number of aliens in simulation
+* As cities fall to aliens, they are reported in specfic format detailed [here](#reportFallenCityFormat)
+* Ability to control of the number of aliens in simulation
 
 Simulation will honor the following aliens charistics:
 
 * Aliens enter a random city one at a time.
 * If two aliens enter a city, city is destroyed along with the aliens.
-* Once all aliens have landed in various cities, assuming they survive they move to a neighboring city if there is one.  If there isn't one, they would be trapped in that city for the duration of the simulation.
+* Once all aliens have landed in various cities, in the next round they move to a neighboring city if there is one.  If there isn't one, they would be trapped in that city for the duration of the simulation.
 * Destroyed cites are no longer on the map of available cities
 * On initial landing, if a city is already destroyed then incoming aliens will not land in that destroyed city keeping to the requirement that once a city is destroyed it is off the map.
+* If all remaining aliens are dead, simulation will end
+* If all remaining aliens are trapped, simulation will end
 
 
 # Setup
 
-* Have [Golang installed](https://go.dev/dl/) in PATH.  Any version should work but testing with Go v1.18 on Ubuntu 20.4
+[Golang should be installed](https://go.dev/dl/) in PATH.  Any version should work but testing with Go v1.18 on Ubuntu 20.4
 
 # Usage
 
@@ -30,7 +32,7 @@ Simulation will honor the following aliens charistics:
 
 **Step 2.)** Run an invasion
 
-   ./alien-invasion < ../../testdata/small-map.txt
+    ./alien-invasion < ../../testdata/small-map.txt
 
 Sample Output:
 
@@ -59,9 +61,9 @@ Trenton
   -numAliens int
     	Number of aliens invading (default 10)
   -numRounds int
-    	Number of rounds the aliens perform beforing giving up (default 10)
+    	Number of rounds the aliens perform before giving up (default 10)
   -silent
-    	No log output but still output city report and fallen cities
+    	Supress log output but still output city report and fallen cities
 ```
 
 # Unit Testing
@@ -78,15 +80,18 @@ Boston north=Bangor south=NewYork west=Albany
 NewYork south=Trenton west=Columbus
 ```
 
+Format Assumptions:
+
 * City names cannot contain spaces
 * If a city references another city in a direction, that referenced city **is not required** to have a separate line.
 * If a map contains inconsitent data with regard to neighboring references then those inconstencies will not be caught.  
 Example of bad data:
 
-    Boston north=Bangor
-    Bangor south=Portland
-
-# <a name="reportFallenCityFormat"></a>Report Fallen City format specification    
+```
+Boston north=Bangor
+Bangor south=Portland
+```
+# <a name="reportFallenCityFormat"></a>Fallen city format specification    
 
 When a city falls to aliens, the city and the responsible aliens are reported in this format:
 
@@ -96,9 +101,9 @@ NewYork has been destroyed by alien 1 and alien 0!
 
 Where `NewYork` is the city name. Aliens `1` and `0` are the responsible aliens.
 
-# Developer Note - (Golden files)[https://ieftimov.com/posts/testing-in-go-golden-files/] Unit Testing
+# Developer Note - [Golden files](https://ieftimov.com/posts/testing-in-go-golden-files/)Unit Testing
 
-Golden files are used to ensure large dataset change only when desired and in precise ways. If a unit test fails because the output doesn't match a "golden file", first inspect the difference.  If the difference is expected, simply accept the difference by running the test again with the `-update` flag.
+Golden files are used to ensure large datasets only change when desired and in precise ways. If a unit test fails because the output doesn't match a "golden file", first inspect the difference.  If the difference is expected, simply accept the difference by running the test again with the `-update` flag.
 
 Example:
 ```

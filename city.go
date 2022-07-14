@@ -5,6 +5,7 @@ import (
 	"sort"
 )
 
+// neighboring directions supported in each city
 const (
 	North int = iota
 	South
@@ -12,6 +13,7 @@ const (
 	West
 )
 
+// convient list of directions in order of constants.
 var directions = []int{
 	North, South, East, West,
 }
@@ -29,6 +31,7 @@ type city struct {
 	West  *city
 }
 
+// cityNames are in city name sorted order
 func cityNames(cities map[string]*city) []string {
 	names := make([]string, 0, len(cities))
 	for name := range cities {
@@ -38,6 +41,7 @@ func cityNames(cities map[string]*city) []string {
 	return names
 }
 
+// invadedCityNames are in city name sorted order
 func invadedCityNames(cities map[*city]alien) []string {
 	names := make([]string, 0, len(cities))
 	for city := range cities {
@@ -47,6 +51,11 @@ func invadedCityNames(cities map[*city]alien) []string {
 	return names
 }
 
+// addNeighbor will add a neighboring city to a given city AND
+// will also add given city as a reference back to the given city
+// in the opposite compass direction. e.g. If you add a neighbor
+// to the south, that neighbor will have a neighbor to the north
+// to the original city
 func (c *city) addNeighbor(direction int, neighbor *city) {
 	switch direction {
 	case North:
@@ -66,6 +75,8 @@ func (c *city) addNeighbor(direction int, neighbor *city) {
 	}
 }
 
+// neighoringCity gets a neighbor in a specific direction.  If the city doesn't
+// have a neighbor in that direction, nil is returned
 func (c *city) neighoringCity(direction int) *city {
 	switch direction {
 	case North:
@@ -84,7 +95,7 @@ func (c *city) neighoringCity(direction int) *city {
 // destroy will trap any aliens in the city and remove all roads
 // into city from neighboring cities
 func (c *city) destroy(a, b alien) {
-	for direction := range directions {		
+	for direction := range directions {
 		neighbor := c.neighoringCity(direction)
 		if neighbor != nil {
 			// remove all pointers back to destroyed city from neighboring cities
