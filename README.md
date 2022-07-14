@@ -16,7 +16,7 @@ Simulation will honor the following aliens characteristics:
 * On initial landing, if a city is already destroyed then incoming aliens will not land in that destroyed city keeping to the requirement that once a city is destroyed it is off the map.
 * If all remaining aliens are dead, simulation will end
 * If all remaining aliens are trapped, simulation will end
-* Aliens all attempt to leave respective cities then enter a new random city one at a time. So if in round `2`, alien `10` was left in a city `X`.  Then in round `3` alien `99` enters city `X` before aliens enters a new city in round `3`, it will not trigger a fight between aliens `10` and `99`.
+* Aliens all attempt to leave respective cities then enter a new random city one at a time. So if in round `2`, alien `10` was in a city `X`.  Then in round `3` alien `99` enters city `X`.  This will not trigger a fight between aliens `10` and `99`.
 
 # Setup
 
@@ -102,21 +102,33 @@ Where `NewYork` is the city name. Aliens `1` and `0` are the responsible aliens.
 
 # Developer Note - [Golden Files](https://ieftimov.com/posts/testing-in-go-golden-files/) in Unit Testing
 
-Golden files are used to ensure large datasets only change when desired and in precise ways. If a unit test fails because the output doesn't match a "golden file", first inspect the difference.  If the difference is expected, simply accept the difference by running the test again with the `-update` flag.
+Golden files are used to ensure large datasets only change when desired and in precise ways. If a unit test fails because the output doesn't match a "golden file" there are two options.  First inspect the "diff" and if the difference is expected, simply accept the difference by running the test again with the `-update` flag.  This strategy is used in the Golang SDK but not exclusive any single computer language.
 
 Example:
 ```
 go test -run TestMediumInvation
+
+        	            	Diff:
+        	            	--- Expected
+        	            	+++ Actual
+        	            	@@ -4,3 +4,2 @@
+        	            	 Trenton has been destroyed by alien 7 and alien 4!
+        	            	-Bogus
+        	            	 Boston
+        	Test:       	TestSmallInvasion
 ```
-If difference **is expected**, then run
+
+If difference **is expected**, then run following command to update the golden file
+
 ```
 go test -run TestMediumInvation -update
 ```
-If difference **is not expected**, then fix the unit test.
+
+If difference **is not expected**, then you found a bug in your code.
 
 # Developer Note - Pseudo Random Unit Testing
 
-Some unit tests set the random number seed to get consistent random values, or "pseudo random" values.  Together with golden files, very complex code with randomness can have a predictable output to test against.  In order for this to work, certain code may have to avoid iterating maps as that iteration is not deterministic.
+Some unit tests set the random number seed to get consistent random values, or "pseudo random" values.  Together with golden files, very complex code with randomness can have a predictable output to test against.  In order for this to work, certain code may have to avoid iterating Golang maps as that iteration is not deterministic.
 
 # Developer Note - Test Coverage
 
