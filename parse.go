@@ -87,6 +87,9 @@ func parseCityRef(line string) (*cityRef, error) {
 		if len(directionAndCity) != 2 {
 			return nil, fmt.Errorf("parse error, invalid direction=city '%s'", segs[i])
 		}
+		if directionAndCity[1] == "" {
+			return nil, fmt.Errorf("no city name given for '%s'  %s=", segs[i], directionAndCity[1])
+		}
 		// opinion: allows for redundant directions and takes last value
 		switch directionAndCity[0] {
 		case "north":

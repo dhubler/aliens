@@ -56,6 +56,14 @@ func TestParseLine(t *testing.T) {
 			invalid: true,
 		},
 		{
+			line:    "Foo north==Goo",
+			invalid: true,
+		},
+		{
+			line:    "Foo north= south=Goo",
+			invalid: true,
+		},
+		{
 			line:     "Foo north=Bar",
 			expected: &cityRef{Name: "Foo", North: "Bar"},
 		},

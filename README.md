@@ -10,13 +10,17 @@ Requirements:
 
 Simulation will honor the following aliens characteristics:
 
-* If two aliens enter a city, city is destroyed along with the aliens.
-* Once all aliens have landed in various cities, in the next round they move to a neighboring city if there is one.  If there isn't one, they would be trapped in that city for the duration of the simulation.
-* Destroyed cites are no longer on the map of available cities
-* On initial landing, if a city is already destroyed then incoming aliens will not land in that destroyed city keeping to the requirement that once a city is destroyed it is off the map.
-* If all remaining aliens are dead, simulation will end
-* If all remaining aliens are trapped, simulation will end
-* Aliens all attempt to leave respective cities then enter a new random city one at a time. So if in round `2`, alien `10` was in a city `X`.  Then in round `3` alien `99` enters city `X`.  This will not trigger a fight between aliens `10` and `99`.
+* If two aliens enter a city, the city MUST be destroyed along with the aliens.
+* Once all aliens have landed in various cities, in the next round they MUST move to a neighboring city if there is one.  They MUST NOT stay in the same city. If there is no neighboring city to move to, they would be trapped in that city for the duration of the simulation.
+* Destroyed cites MUST be removed from the map of available cities reported at the end of the simulation.
+* On initial landing, if a city is already destroyed then incoming aliens MUST NOT land in that destroyed city.  This honors above requirement.
+* If all remaining aliens are dead, simulation MAY end
+* If no cities remain, simulation MAY end
+* If all remaining aliens are trapped, simulation MAY end
+* Aliens from a previous round in a given city MUST NOT interact with incoming aliens in the next round. For example, if in round `2`, alien `10` was in a city `X`.  Then in round `3` alien `99` enters city `X`.  This will not trigger a fight between aliens `10` and `99`.
+
+Items of note:
+* Because of the above requirements, aliens often oscilate between two cities until the end of the simulation when two cities only have one remaining exit path and that is to eachother. For example, if the only way out of a Boston is north to Bangor and the only way out of Bangor is south to Boston. If each city has a single alien. Then the aliens will constantly pass eachother in each round until the end of the simulation forming a form of stalemate.  Current program does not detect this state and end the simulation early, but it could be considered in the future.
 
 # Setup
 
@@ -24,14 +28,10 @@ Simulation will honor the following aliens characteristics:
 
 # Usage
 
-**Step 1.)** Compile binary
-
-    cd cmd/alien-invasion
-    go build
-
-**Step 2.)** Run an invasion
-
-    ./alien-invasion < ../../testdata/small-map.txt
+```
+cd cmd/alien-invasion
+go run < ../../testdata/small-map.txt
+```
 
 Sample Output:
 
@@ -55,7 +55,6 @@ Trenton
 # Usage Options
 
 ```
- ./alien-invasion --help
  Usage of ./alien-invasion:
   -numAliens int
     	Number of aliens invading (default 10)
