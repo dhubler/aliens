@@ -13,23 +13,25 @@ import (
 //   Boston south=NewYork west=Albany
 //   Albany east=Boston
 //   ..
-func parse(r io.Reader) (map[string]*city, error) {
+func parse(r io.Reader, strict bool) (map[string]*city, error) {
 	lines := bufio.NewReader(r)
 	refs := make([]*cityRef, 0)
 	for {
 		line, err := lines.ReadString('\n')
+		if line != "" {
+			ref, err := parseCityRef(line)
+			if err != nil {
+				return nil, err
+			}
+			if ref != nil {
+				refs = append(refs, ref)
+			}
+		}
 		if err != nil {
 			if err == io.EOF {
 				break
 			}
 			return nil, err
-		}
-		ref, err := parseCityRef(line)
-		if err != nil {
-			return nil, err
-		}
-		if ref != nil {
-			refs = append(refs, ref)
 		}
 	}
 	cities := make(map[string]*city, len(refs))
@@ -65,6 +67,16 @@ func parse(r io.Reader) (map[string]*city, error) {
 				return nil, fmt.Errorf("parse error. city '%s' neighbor '%s' to the '%s' was not found", ref.Name, neighborName, directionLabel)
 			}
 			city.addNeighbor(direction, neighbor)
+			if !strict {
+				// check if there is a conflicting city <-> neighbor relationship
+				oppositeDir := oppositeDirection(direction)
+				oppositeNeighbor := neighbor.neighoringCity(oppositeDir)
+				if oppositeNeighbor != nil && oppositeNeighbor != city {
+					return nil, fmt.Errorf("%s already has %s as a neighbor and cannot assign %s", neighborName, oppositeNeighbor.Name, city.Name)
+				}
+				// add reverse links even when not explicitly listed
+				neighbor.addNeighbor(oppositeDir, city)
+			}
 		}
 	}
 

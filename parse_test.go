@@ -2,6 +2,7 @@ package aliens
 
 import (
 	"bytes"
+	"io/ioutil"
 	"strings"
 	"testing"
 
@@ -13,7 +14,7 @@ func TestBasicParse(t *testing.T) {
 Bar south=Foo west=Bee
 Foo north=Bar south=Qu-ux west=Baz
 `
-	cityMap, err := parse(strings.NewReader(in))
+	cityMap, err := parse(strings.NewReader(in), false)
 	assert.NoError(t, err)
 	assert.NotNil(t, cityMap)
 	assert.Equal(t, 5, len(cityMap))
@@ -94,7 +95,49 @@ func TestParseLine(t *testing.T) {
 	}
 }
 
-func TestLargeDump(t *testing.T) {
+func TestParseMaps(t *testing.T) {
+	tests := []struct {
+		src            string
+		expected       string
+		expectedStrict string
+	}{
+		{
+			"testdata/small-map.txt",
+			"testdata/small-map.golden",
+			"testdata/small-map-strict.golden",
+		},
+		{
+			"testdata/circular-map.txt",
+			"testdata/circular-map.golden",
+			"testdata/circular-map-strict.golden",
+		},
+		{
+			"testdata/bad-map.txt",
+			"testdata/bad-map.golden",
+			"testdata/bad-map-strict.golden",
+		},
+	}
+
+	for _, test := range tests {
+		src, err := ioutil.ReadFile(test.src)
+		if err != nil {
+			t.Fatal(err, test.src)
+		}
+		actual, err := parse(bytes.NewBuffer(src), false)
+		assert.NoError(t, err)
+		var buf bytes.Buffer
+		dump(&buf, actual)
+		Golden(t, *updateFlag, test.expected, &buf)
+
+		actual2, err := parse(bytes.NewBuffer(src), true)
+		assert.NoError(t, err)
+		var buf2 bytes.Buffer
+		dump(&buf2, actual2)
+		Golden(t, *updateFlag, test.expectedStrict, &buf2)
+	}
+}
+
+func TestLargeDump(t *testing.T) { // grow up
 	pool := generateCityMap(5)
 	var actual bytes.Buffer
 	err := dump(&actual, pool)

@@ -1,0 +1,3 @@
+Bangor north=Trenton south=Boston
+Boston north=Bangor south=Trenton
+Trenton north=Boston south=Bangor

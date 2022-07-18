@@ -1,0 +1,20 @@
+using random seed 10
+invasion starting round
+alien 0 invading Boston
+alien 1 invading NewYork
+alien 2 invading Bangor
+alien 3 invading Trenton
+alien 4 invading Albany
+alien 5 invading NewYork
+NewYork has been destroyed by alien 5 and alien 1!
+alien 6 invading Bangor
+Bangor has been destroyed by alien 6 and alien 2!
+alien 7 invading Columbus
+alien 8 invading Trenton
+Trenton has been destroyed by alien 8 and alien 3!
+alien 9 invading Albany
+Albany has been destroyed by alien 9 and alien 4!
+invasion 1 round
+2 cities left, 0 alien(s) left, 2 alien(s) trapped
+Boston
+Columbus

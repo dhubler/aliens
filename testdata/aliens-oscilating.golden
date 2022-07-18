@@ -1,0 +1,49 @@
+using random seed 1657982898578641344
+invasion starting round
+alien 0 invading Albany
+alien 1 invading Boston
+alien 2 invading Boston
+Boston has been destroyed by alien 2 and alien 1!
+alien 3 invading Bangor
+alien 4 invading Albany
+Albany has been destroyed by alien 4 and alien 0!
+alien 5 invading NewYork
+alien 6 invading Bangor
+Bangor has been destroyed by alien 6 and alien 3!
+alien 7 invading Trenton
+alien 8 invading Columbus
+alien 9 invading Trenton
+Trenton has been destroyed by alien 9 and alien 7!
+invasion 1 round
+alien 8 invading NewYork
+alien 5 invading Columbus
+invasion 2 round
+alien 5 invading NewYork
+alien 8 invading Columbus
+invasion 3 round
+alien 8 invading NewYork
+alien 5 invading Columbus
+invasion 4 round
+alien 5 invading NewYork
+alien 8 invading Columbus
+invasion 5 round
+alien 8 invading NewYork
+alien 5 invading Columbus
+invasion 6 round
+alien 5 invading NewYork
+alien 8 invading Columbus
+invasion 7 round
+alien 8 invading NewYork
+alien 5 invading Columbus
+invasion 8 round
+alien 5 invading NewYork
+alien 8 invading Columbus
+invasion 9 round
+alien 8 invading NewYork
+alien 5 invading Columbus
+invasion 10 round
+alien 5 invading NewYork
+alien 8 invading Columbus
+2 cities left, 2 alien(s) left, 0 alien(s) trapped
+Columbus east=NewYork
+NewYork west=Columbus

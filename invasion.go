@@ -1,7 +1,6 @@
 package aliens
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"math/rand"
@@ -22,6 +21,7 @@ type Options struct {
 
 	CityMapInput        io.Reader
 	RemaingCitiesOutput io.Writer
+	StrictMapParse      bool
 }
 
 // NewInvasion interface to run invasion simulation.
@@ -32,9 +32,8 @@ func Invade(options Options) error {
 		rounds: options.InvasionRounds,
 	}
 	log.Printf("using random seed %d", options.Seed)
-	fmt.Printf("using random seed %d", options.Seed)
 	var err error
-	invasion.cities, err = parse(options.CityMapInput)
+	invasion.cities, err = parse(options.CityMapInput, options.StrictMapParse)
 	if err != nil {
 		return err
 	}
@@ -53,31 +52,39 @@ type Invasion struct {
 // invade simulates aliens navigating a map of cities according to a set of
 // rules outlined in README.md.
 // returns list of cities that are remaining after invasion
-func (attack *Invasion) invade() {
+func (sim *Invasion) invade() {
 	destroyedCities := make(map[string]*city)
 	invadedCities := make(map[*city]alien)
 	trappedAlienCities := make(map[*city]alien)
-	startCityNames := cityNames(attack.cities)
+	startCityNames := cityNames(sim.cities)
 
-	if attack.rounds > maxRounds {
-		log.Printf("warning, limited to %d exceeds maximum rounds or %d", attack.rounds, maxRounds)
-		attack.rounds = maxRounds
+	if sim.rounds > maxRounds {
+		log.Printf("warning, limited to %d exceeds maximum rounds or %d", sim.rounds, maxRounds)
+		sim.rounds = maxRounds
 	}
 
 	// start aliens in random cities, cities can be destroyed in this phase
 	log.Print("invasion starting round")
-	for _, alien := range attack.aliens {
-		cityIndex := attack.rnd.Intn(len(attack.cities))
-		city := attack.cities[startCityNames[cityIndex]]
+	for _, alien := range sim.aliens {
+		cityIndex := sim.rnd.Intn(len(sim.cities))
+	reattemptLanding:
+		city := sim.cities[startCityNames[cityIndex]]
 		if _, alreadyDestroyed := destroyedCities[city.Name]; alreadyDestroyed {
 			// avoid landing in cities that were already destroyed in this initial round
-			continue
+			if len(destroyedCities) == len(sim.cities) {
+				// no more cities to attack
+				break
+			}
+			// go to next city, do not pick another random city because if there is
+			// only 1 city left in a large list, finding it randomly would be inefficient
+			cityIndex = (cityIndex + 1) % len(sim.cities)
+			goto reattemptLanding
 		}
-		attack.invadeCity(alien, city, invadedCities, destroyedCities)
+		sim.invadeCity(alien, city, invadedCities, destroyedCities)
 	}
 
 	// move aliens around until rounds are done
-	for i := 0; i < attack.rounds; i++ {
+	for i := 0; i < sim.rounds; i++ {
 		log.Printf("invasion %d round", i+1)
 		currentCities := invadedCities
 
@@ -88,13 +95,13 @@ func (attack *Invasion) invade() {
 
 		invadedCities = make(map[*city]alien)
 		for _, origCityName := range currentCitiesNames {
-			origCity := attack.cities[origCityName]
+			origCity := sim.cities[origCityName]
 			alien := currentCities[origCity]
-			city := attack.nextRandomCity(origCity)
+			city := sim.nextRandomCity(origCity)
 			if city == nil {
 				trappedAlienCities[origCity] = alien
 			} else {
-				attack.invadeCity(alien, city, invadedCities, destroyedCities)
+				sim.invadeCity(alien, city, invadedCities, destroyedCities)
 			}
 		}
 		if len(invadedCities) == 0 {
@@ -102,20 +109,20 @@ func (attack *Invasion) invade() {
 		}
 	}
 
-	log.Printf("%d alien(s) left, %d alien(s) trapped", len(invadedCities), len(trappedAlienCities))
-
 	// remaining = original list - destroyed
-	attack.remaining = make(map[string]*city)
-	for name, city := range attack.cities {
+	sim.remaining = make(map[string]*city)
+	for name, city := range sim.cities {
 		if _, destroyed := destroyedCities[name]; !destroyed {
-			attack.remaining[name] = city
+			sim.remaining[name] = city
 		}
 	}
+
+	log.Printf("%d cities left, %d alien(s) left, %d alien(s) trapped", len(sim.remaining), len(invadedCities), len(trappedAlienCities))
 }
 
 // invadeCity checks if another alien is in city to trigger a destroy or if this
 // is just first visit
-func (attack *Invasion) invadeCity(incomingAlien alien, targetCity *city, invadedCities map[*city]alien, destroyedCities map[string]*city) {
+func (sim *Invasion) invadeCity(incomingAlien alien, targetCity *city, invadedCities map[*city]alien, destroyedCities map[string]*city) {
 	log.Printf("alien %s invading %s", incomingAlien, targetCity.Name)
 	if invadedAlien, isInvaded := invadedCities[targetCity]; isInvaded {
 		destroyedCities[targetCity.Name] = targetCity
@@ -129,8 +136,8 @@ func (attack *Invasion) invadeCity(incomingAlien alien, targetCity *city, invade
 
 // nextRandomCity picks a random neighboring city or return nil if
 // there are no cities left
-func (attack *Invasion) nextRandomCity(c *city) *city {
-	startCityIndex := attack.rnd.Intn(len(directions))
+func (sim *Invasion) nextRandomCity(c *city) *city {
+	startCityIndex := sim.rnd.Intn(len(directions))
 	for i := 0; i < len(directions); i++ {
 		candidateIndex := (startCityIndex + i) % len(directions)
 		candidate := c.neighoringCity(candidateIndex)

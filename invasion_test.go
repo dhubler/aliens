@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"io"
+	"log"
 	"math/rand"
 	"os"
 	"testing"
@@ -18,18 +20,32 @@ func TestInvasions(t *testing.T) {
 		expected string
 	}{
 		{
-			seed:     1657895446613653668,
+			seed:     1657964729860941318,
 			cities:   "testdata/small-map.txt",
 			expected: "testdata/aliens-lose.golden",
 		},
 		{
-			seed:     1657964729860941318,
+			seed:     1657982898578641344,
 			cities:   "testdata/small-map.txt",
-			expected: "testdata/aliens-trapped-and-oscilating.golden",
+			expected: "testdata/aliens-oscilating.golden",
+		},
+		{
+			seed:     10,
+			cities:   "testdata/small-map.txt",
+			expected: "testdata/aliens-trapped.golden",
+		},
+		{
+			seed: 10,
+			// if you go north enough, even south is eventually north on a sphere
+			cities:   "testdata/circular-map.txt",
+			expected: "testdata/nothing-left.golden",
 		},
 	}
+	var buf bytes.Buffer
+	resetLog := divertGlobalLogger(&buf)
+	defer resetLog()
 	for _, test := range tests {
-		var buf bytes.Buffer
+		buf.Reset()
 		in, err := os.Open(test.cities)
 		if err != nil {
 			t.Fatal(err)
@@ -38,7 +54,7 @@ func TestInvasions(t *testing.T) {
 			Seed:                test.seed,
 			RemaingCitiesOutput: &buf,
 			NumberAliens:        10,
-			InvasionRounds:      maxRounds,
+			InvasionRounds:      10,
 			CityMapInput:        in,
 		})
 		in.Close()
@@ -46,13 +62,27 @@ func TestInvasions(t *testing.T) {
 	}
 }
 
+// for unit test that want to capture and verify log output.  be sure to call returned
+// function in defer
+func divertGlobalLogger(capture io.Writer) func() {
+	orig := log.Default().Flags()
+	log.SetFlags(0)
+	log.SetOutput(capture)
+	return func() {
+		log.SetFlags(orig)
+		log.SetOutput(os.Stderr)
+	}
+}
+
 func TestMediumInvasion(t *testing.T) {
 	var buf bytes.Buffer
+	resetLog := divertGlobalLogger(&buf)
+	defer resetLog()
 	invasion := &Invasion{
 		rnd:    rand.New(rand.NewSource(0)),
 		cities: generateCityMap(10),
 		aliens: createAliens(100),
-		rounds: maxRounds,
+		rounds: 200,
 	}
 	invasion.invade()
 	err := dump(&buf, invasion.remaining)
@@ -63,14 +93,17 @@ func TestMediumInvasion(t *testing.T) {
 }
 
 // generate a city map of a given level
+//    North: ^     East: >
+//    South: v     West: <
 // Example
-//                         x
+//                         .
 //                 ------------------
 //                 |    |     |     |
-//                xn    xs    xe    xw
+//                .^    .v    .>    .<
+//                 |     |
 //    -------------    ------...
-//    |   |   |   |    |   |
-//   xnn xns xne xnw  xsn xss  ...
+//    |    |   |      |     |
+//   .^^  .^> .^<    .vv  .>  ...
 func generateCityMap(levels int) map[string]*city {
 	root := &city{Name: "."}
 	pool := make(map[string]*city)
@@ -94,6 +127,7 @@ func generateCityMapNest(levels int, parent *city, pool map[string]*city) {
 			neighbor := &city{Name: fmt.Sprintf("%s%s", parent.Name, labels[direction])}
 			pool[neighbor.Name] = neighbor
 			parent.addNeighbor(direction, neighbor)
+			neighbor.addNeighbor(oppositeDirection(direction), parent)
 			added = append(added, neighbor)
 		}
 	}

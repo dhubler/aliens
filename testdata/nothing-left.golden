@@ -1,0 +1,13 @@
+using random seed 10
+invasion starting round
+alien 0 invading Trenton
+alien 1 invading Boston
+alien 2 invading Boston
+Boston has been destroyed by alien 2 and alien 1!
+alien 3 invading Trenton
+Trenton has been destroyed by alien 3 and alien 0!
+alien 4 invading Bangor
+alien 5 invading Bangor
+Bangor has been destroyed by alien 5 and alien 4!
+invasion 1 round
+0 cities left, 0 alien(s) left, 0 alien(s) trapped

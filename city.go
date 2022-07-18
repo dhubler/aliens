@@ -13,6 +13,20 @@ const (
 	West
 )
 
+func oppositeDirection(d int) int {
+	switch d {
+	case North:
+		return South
+	case South:
+		return North
+	case East:
+		return West
+	case West:
+		return East
+	}
+	panic(fmt.Sprintf("bad direction %d", d))
+}
+
 // convient list of directions in order of constants.
 var directions = []int{
 	North, South, East, West,
@@ -60,16 +74,12 @@ func (c *city) addNeighbor(direction int, neighbor *city) {
 	switch direction {
 	case North:
 		c.North = neighbor
-		neighbor.South = c
 	case South:
 		c.South = neighbor
-		neighbor.North = c
 	case West:
 		c.West = neighbor
-		neighbor.East = c
 	case East:
 		c.East = neighbor
-		neighbor.West = c
 	default:
 		panic(fmt.Errorf("invalid direction %d", direction))
 	}

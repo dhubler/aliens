@@ -1,0 +1,2 @@
+Boston north=NewYork south=NewYork
+NewYork north=Boston south=Boston

@@ -1,0 +1,6 @@
+Albany east=Boston
+Bangor south=Boston
+Boston north=Bangor south=NewYork west=Albany
+Columbus east=NewYork
+NewYork north=Boston south=Trenton west=Columbus
+Trenton north=NewYork

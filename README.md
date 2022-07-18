@@ -20,7 +20,8 @@ Simulation will honor the following aliens characteristics:
 * Aliens from a previous round in a given city MUST NOT interact with incoming aliens in the next round. For example, if in round `2`, alien `10` was in a city `X`.  Then in round `3` alien `99` enters city `X`.  This will not trigger a fight between aliens `10` and `99`.
 
 Items of note:
-* Because of the above requirements, aliens often oscilate between two cities until the end of the simulation when two cities only have one remaining exit path and that is to eachother. For example, if the only way out of a Boston is north to Bangor and the only way out of Bangor is south to Boston. If each city has a single alien. Then the aliens will constantly pass eachother in each round until the end of the simulation forming a form of stalemate.  Current program does not detect this state and end the simulation early, but it could be considered in the future.
+* Because of the above requirements, aliens might oscilate between two cities until the end of the simulation. This happens when two cities only have one remaining exit path and that is to eachother. For example, if the only way out of Boston is to Bangor and the only way out of Bangor is to Boston and each city has a single alien then the aliens will constantly pass eachother in each round until the end of the simulation. 
+
 
 # Setup
 
@@ -55,13 +56,19 @@ Trenton
 # Usage Options
 
 ```
- Usage of ./alien-invasion:
+Usage of ./alien-invasion: < city-map-file > report
   -numAliens int
     	Number of aliens invading (default 10)
   -numRounds int
-    	Number of rounds the aliens perform before giving up (default 10)
+    	Limit the number of rounds the aliens perform before giving up (default 10000)
+  -outputFile string
+    	Optional remaining cities output file
+  -seed int
+    	Optional random seed to control pseudo random results.  Default of zero for random each time
   -silent
     	Supress log output but still output city report and fallen cities
+  -strict
+    	Use a more strict parse that does not back link any cities in opposite directions
 ```
 
 # Unit Testing
