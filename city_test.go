@@ -17,13 +17,21 @@ func TestCityRef(t *testing.T) {
 func TestCity(t *testing.T) {
 	x := &city{Name: "x"}
 	n := &city{Name: "n"}
-	x.addNeighbor(North, n)
+	assert.NoError(t, x.addNeighbor(North, n))
 	s := &city{Name: "s"}
-	x.addNeighbor(South, s)
+	assert.NoError(t, x.addNeighbor(South, s))
 	e := &city{Name: "e"}
-	x.addNeighbor(East, e)
+	assert.NoError(t, x.addNeighbor(East, e))
 	w := &city{Name: "w"}
-	x.addNeighbor(West, w)
+	assert.NoError(t, x.addNeighbor(West, w))
+
+	t.Run("harmless neighbors", func(t *testing.T) {
+		assert.NoError(t, x.addNeighbor(South, s))
+	})
+
+	t.Run("bad neighbor  ", func(t *testing.T) {
+		assert.Error(t, x.addNeighbor(North, s))
+	})
 
 	t.Run("neighbor", func(t *testing.T) {
 		assert.Equal(t, s, x.neighoringCity(South))
@@ -36,14 +44,24 @@ func TestCity(t *testing.T) {
 		x.destroy(alien("a"), alien("b"))
 		assert.Nil(t, x.South)
 		assert.Nil(t, s.North)
-	
+
 		assert.Nil(t, x.North)
 		assert.Nil(t, n.South)
-	
+
 		assert.Nil(t, x.West)
 		assert.Nil(t, w.East)
-	
+
 		assert.Nil(t, x.East)
-		assert.Nil(t, e.West)	
+		assert.Nil(t, e.West)
 	})
+}
+
+func TestAddNeighborBidirectional(t *testing.T) {
+	a := &city{Name: "a"}
+	b := &city{Name: "b"}
+	c := &city{Name: "c"}
+	err := a.addNeighborBidiectional(North, b)
+	assert.NoError(t, err)
+	err = b.addNeighborBidiectional(South, c)
+	assert.Error(t, err)
 }

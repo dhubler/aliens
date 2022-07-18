@@ -54,28 +54,26 @@ func parse(r io.Reader, strict bool) (map[string]*city, error) {
 		}
 	}
 	// pass 2 : build cities pointers in all directions
-	var directionLabels = []string{"north", "south", "east", "west"}
+	//var directionLabels = []string{"north", "south", "east", "west"}
 	for _, ref := range refs {
 		city := cities[ref.Name]
-		for direction, directionLabel := range directionLabels {
+		for direction := range directions {
 			neighborName := ref.neighoringCity(direction)
 			if neighborName == "" {
 				continue
 			}
-			neighbor, found := cities[neighborName]
-			if !found {
-				return nil, fmt.Errorf("parse error. city '%s' neighbor '%s' to the '%s' was not found", ref.Name, neighborName, directionLabel)
-			}
-			city.addNeighbor(direction, neighbor)
-			if !strict {
-				// check if there is a conflicting city <-> neighbor relationship
-				oppositeDir := oppositeDirection(direction)
-				oppositeNeighbor := neighbor.neighoringCity(oppositeDir)
-				if oppositeNeighbor != nil && oppositeNeighbor != city {
-					return nil, fmt.Errorf("%s already has %s as a neighbor and cannot assign %s", neighborName, oppositeNeighbor.Name, city.Name)
+			neighbor := cities[neighborName]
+
+			if strict {
+				// all paths must be explicity defined
+				if err := city.addNeighbor(direction, neighbor); err != nil {
+					return nil, err
 				}
-				// add reverse links even when not explicitly listed
-				neighbor.addNeighbor(oppositeDir, city)
+			} else {
+				// assume every path in one direction implies path back in opposite direction
+				if err := city.addNeighborBidiectional(direction, neighbor); err != nil {
+					return nil, err
+				}
 			}
 		}
 	}

@@ -3,6 +3,7 @@ package aliens
 import (
 	"bytes"
 	"io/ioutil"
+	"os"
 	"strings"
 	"testing"
 
@@ -95,6 +96,16 @@ func TestParseLine(t *testing.T) {
 	}
 }
 
+func TestBadMaps(t *testing.T) {
+	rdr, err := os.Open("testdata/bad-map.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer rdr.Close()
+	_, err = parse(rdr, false)
+	assert.Equal(t, "NewYork already has Boston as a neighbor and cannot assign NewHaven", err.Error())
+}
+
 func TestParseMaps(t *testing.T) {
 	tests := []struct {
 		src            string
@@ -111,11 +122,11 @@ func TestParseMaps(t *testing.T) {
 			"testdata/circular-map.golden",
 			"testdata/circular-map-strict.golden",
 		},
-		{
-			"testdata/bad-map.txt",
-			"testdata/bad-map.golden",
-			"testdata/bad-map-strict.golden",
-		},
+		// {
+		// 	"testdata/bad-map.txt",
+		// 	"testdata/bad-map.golden",
+		// 	"testdata/bad-map-strict.golden",
+		// },
 	}
 
 	for _, test := range tests {
@@ -124,13 +135,17 @@ func TestParseMaps(t *testing.T) {
 			t.Fatal(err, test.src)
 		}
 		actual, err := parse(bytes.NewBuffer(src), false)
-		assert.NoError(t, err)
+		if err != nil {
+			t.Fatal(err, test.src)
+		}
 		var buf bytes.Buffer
 		dump(&buf, actual)
 		Golden(t, *updateFlag, test.expected, &buf)
 
 		actual2, err := parse(bytes.NewBuffer(src), true)
-		assert.NoError(t, err)
+		if err != nil {
+			t.Fatal(err, test.src)
+		}
 		var buf2 bytes.Buffer
 		dump(&buf2, actual2)
 		Golden(t, *updateFlag, test.expectedStrict, &buf2)

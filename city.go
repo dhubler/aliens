@@ -70,7 +70,14 @@ func invadedCityNames(cities map[*city]alien) []string {
 // in the opposite compass direction. e.g. If you add a neighbor
 // to the south, that neighbor will have a neighbor to the north
 // to the original city
-func (c *city) addNeighbor(direction int, neighbor *city) {
+func (c *city) addNeighbor(direction int, neighbor *city) error {
+	existing := c.neighoringCity(direction)
+	if existing != nil {
+		if existing != neighbor {
+			return fmt.Errorf("%s already has %s as a neighbor and cannot assign %s", c.Name, existing.Name, neighbor.Name)
+		}
+		return nil
+	}
 	switch direction {
 	case North:
 		c.North = neighbor
@@ -81,8 +88,22 @@ func (c *city) addNeighbor(direction int, neighbor *city) {
 	case East:
 		c.East = neighbor
 	default:
-		panic(fmt.Errorf("invalid direction %d", direction))
+		return fmt.Errorf("invalid direction %d", direction)
 	}
+	return nil
+}
+
+// addNeighbor will add a neighboring city to a given city AND
+// will also add given city as a reference back to the given city
+// in the opposite compass direction. e.g. If you add a neighbor
+// to the south, that neighbor will have a neighbor to the north
+// to the original city
+func (c *city) addNeighborBidiectional(direction int, neighbor *city) error {
+	err := c.addNeighbor(direction, neighbor)
+	if err != nil {
+		return err
+	}
+	return neighbor.addNeighbor(oppositeDirection(direction), c)
 }
 
 // neighoringCity gets a neighbor in a specific direction.  If the city doesn't
