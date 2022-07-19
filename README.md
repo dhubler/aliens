@@ -89,7 +89,7 @@ Format Assumptions:
 
 * City names cannot contain spaces
 * If a city references another city, that referenced city **is not required** to have a separate line.  So in `Boston north=Bangor` then `Bangor south=Boston` is not required
-* If a map contains inconsistent data with regard to neighboring references then those inconstencies will not be detected and results will be suspect.
+* If a map contains inconsistent data with regard to neighboring references then those inconstencies will not be allowed.
 Example of bad data:
 
 ```
