@@ -31,7 +31,7 @@ Items of note:
 
 ```
 cd cmd/alien-invasion
-go run < ../../testdata/small-map.txt
+go run . < ../../testdata/small-map.txt
 ```
 
 Sample Output:
